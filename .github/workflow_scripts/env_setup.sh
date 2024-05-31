@@ -21,6 +21,7 @@ function install_cloud_test {
     python3 -m pip install --upgrade -e ./[tests]
 }
 
+
 function install_latest_tabular_and_multimodal_dependencies {
     git clone https://github.com/autogluon/autogluon.git
     python3 -m pip install -e autogluon/common/
