@@ -152,7 +152,7 @@ jobs:
           filters: |
             other_than_docs:
               - '!(docs/**)**'
-      - name: Test Tabular Cloud
+      - name: Test Text Cloud
         if: steps.changes.outputs.other_than_docs == 'true'
         uses: ./.github/actions/test-cloud
         with:
