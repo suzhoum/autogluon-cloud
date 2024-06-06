@@ -38,7 +38,7 @@ def test_distributed_training(test_helper, framework_version):
             },
         }
 
-        image_uri = test_helper.get_custom_image_uri(framework_version, type="training", gpu=False)
+        image_uri = test_helper.get_custom_image_uri("0.7.0", type="training", gpu=False)
 
         cp.fit(
             predictor_init_args=predictor_init_args,
