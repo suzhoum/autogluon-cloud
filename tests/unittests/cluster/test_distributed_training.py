@@ -39,7 +39,8 @@ def test_distributed_training(test_helper, framework_version):
         }
 
         image_uri = test_helper.get_custom_image_uri(framework_version, type="training", gpu=False)
-
+        print("~!~~~~~~~~~~~")
+        print(framework_version, image_uri)
         cp.fit(
             predictor_init_args=predictor_init_args,
             predictor_fit_args=predictor_fit_args,
@@ -47,6 +48,7 @@ def test_distributed_training(test_helper, framework_version):
             backend_kwargs={
                 "initialization_commands": [
                     "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 763104351884.dkr.ecr.us-east-1.amazonaws.com",
+                    "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 763104351884.dkr.ecr.us-west-2.amazonaws.com",
                     "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 369469875935.dkr.ecr.us-east-1.amazonaws.com",
                 ]
             },

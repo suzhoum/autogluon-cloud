@@ -378,6 +378,8 @@ class RayBackend(Backend):
         raise NotImplementedError
 
     def _get_image_uri(self, framework_version: str, instance_type: str, custom_image_uri: Optional[str] = None):
+        print("~~~~~~~~~~~", framework_version, custom_image_uri)
+
         image_uri = custom_image_uri
         if custom_image_uri is not None:
             framework_version, py_version = None, None
