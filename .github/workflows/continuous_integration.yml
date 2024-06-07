@@ -66,7 +66,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "1.1.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "0.7.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -130,7 +130,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "0.7.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -152,7 +152,7 @@ jobs:
           filters: |
             other_than_docs:
               - '!(docs/**)**'
-      - name: Test Tabular Cloud
+      - name: Test Text Cloud
         if: steps.changes.outputs.other_than_docs == 'true'
         uses: ./.github/actions/test-cloud
         with:
@@ -162,7 +162,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "0.7.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -194,7 +194,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "0.7.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -226,7 +226,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        AG_VERSION: ["source", "0.7.0"]
+        AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -255,6 +255,10 @@ jobs:
           submodule-to-test: timeseries
           ag_version: '${{ matrix.AG_VERSION }}'
   test_cluster:
+    strategy:
+        fail-fast: false
+        matrix:
+          AG_VERSION: ["0.8.2"]
     needs: cloud_lint_check
     runs-on: ubuntu-latest
     steps:
@@ -286,7 +290,7 @@ jobs:
         if: steps.changes.outputs.other_than_docs == 'true'
         run: |
           chmod +x ./.github/workflow_scripts/test_cluster.sh
-          ./.github/workflow_scripts/test_cluster.sh
+          ./.github/workflow_scripts/test_cluster.sh ${{ matrix.AG_VERSION }}
   build_doc:
     if: ${{ github.event_name != 'schedule' }}
     needs: [test_general_cloud, test_tabular_cloud, test_text_cloud, test_image_cloud, test_multimodal_cloud, test_timeseries_cloud, test_cluster]
