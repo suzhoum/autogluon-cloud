@@ -2,8 +2,6 @@ name: Continuous Integration
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "59 10 * * *"  # 2 hrs after the nightly image build workflow
   push:
   pull_request_target:
     types: [labeled, synchronize, opened]
